@@ -20,8 +20,8 @@ public class CameraMovementListener implements MouseWheelListener, MouseListener
 		relx = posx - e.getX();
 		rely = posy - e.getY();
 		
-		cam.x -= relx;
-		cam.y -= rely;
+		cam.x -= relx / cam.zoom;
+		cam.y -= rely / cam.zoom;
 		
 		posx = e.getX(); posy = e.getY();
 	}
@@ -29,6 +29,20 @@ public class CameraMovementListener implements MouseWheelListener, MouseListener
 	public void mouseMoved(MouseEvent e) {
 		posx = e.getX(); posy = e.getY();
 	}
+	
+	
+
+	@Override
+	public void mouseWheelMoved(MouseWheelEvent e) {
+		cam.zoom += Math.sqrt(cam.zoom) *  e.getWheelRotation() / 2;
+		
+		if(cam.zoom > 100) cam.zoom = 100;
+		if(cam.zoom < 0.1) cam.zoom = 0.05;
+	}
+	
+	
+	
+	
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		// TODO Auto-generated method stub
@@ -58,10 +72,6 @@ public class CameraMovementListener implements MouseWheelListener, MouseListener
 	
 
 	
-	@Override
-	public void mouseWheelMoved(MouseWheelEvent e) {
-		
-	}
 
 	
 	

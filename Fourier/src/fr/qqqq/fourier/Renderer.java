@@ -8,12 +8,15 @@ import java.util.ArrayList;
 
 import javax.swing.JComponent;
 
+import fr.qqqq.fourier.shapes.Shape;
+
 public class Renderer extends JComponent {
 	private static final long serialVersionUID = 1L;
 	
 	public CameraMovementListener listener;
 	public Camera cam;
 	
+	public ArrayList<Shape> shape = new ArrayList<Shape>();
 	
 	public Renderer() {
 		super();
@@ -44,9 +47,21 @@ public class Renderer extends JComponent {
 		
 		
 		
-		g2D.setColor(Color.BLUE);
-		g2D.fillOval((int)cam.calcX(-9), (int)cam.calcY(-9), (int)cam.calcX(10), (int)cam.calcY(10));
-		System.out.println();
+		
+		shape.forEach(s -> {
+			s.render(g2D, cam);
+		});
+		//g2D.fillOval((int)cam.calcX(40), (int)cam.calcY(40), (int)cam.scaleX(50), (int)cam.scaleY(50));
+		
+		
+		
+
+		g2D.translate(-getWidth() / 2, -getHeight() / 2);
+		
+		g2D.setColor(Color.BLACK);
+		g2D.drawString("cam: " + cam.x + ", " + cam.y, 0, 12);
+		g2D.drawString("zoom: " + cam.zoom, 0, 24);
+
 	}
 	
 }

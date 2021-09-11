@@ -5,7 +5,7 @@ public class FPSController {
 		// TODO Auto-generated constructor stub
 	}
 	public void run(Renderer r) throws InterruptedException {
-		long lt, t, wait = 0, fps = 1000 / 60;
+		long lt, t, wait = 0, fps = 1000 / 30;
 		
 		lt = System.currentTimeMillis();
 		while(true) {
