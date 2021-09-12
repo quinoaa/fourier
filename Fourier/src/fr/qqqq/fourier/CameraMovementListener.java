@@ -34,7 +34,7 @@ public class CameraMovementListener implements MouseWheelListener, MouseListener
 
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
-		cam.zoom += Math.sqrt(cam.zoom) *  e.getWheelRotation() / 2;
+		cam.zoom += Math.sqrt(cam.zoom) * - e.getWheelRotation() / 2;
 		
 		if(cam.zoom > 100) cam.zoom = 100;
 		if(cam.zoom < 0.1) cam.zoom = 0.05;

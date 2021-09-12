@@ -14,10 +14,14 @@ public class Main {
 		JFrame f = new JFrame("geom");
 		
 		Renderer r = new Renderer();
-
+		
+		
+		
 		r.shape.add(new Line(0, 0, 0, 60));
 		r.shape.add(new Circle(-20, 0, 20));
 		r.shape.add(new Circle(20, 0, 20));
+		
+		
 		
 		r.setPreferredSize(new Dimension(600, 400));
 		f.add(r);
