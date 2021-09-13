@@ -1,13 +1,16 @@
 package fr.qqqq.fourier;
 
 import java.awt.Dimension;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
 import fr.qqqq.fourier.epicircles.Epicircle;
 import fr.qqqq.fourier.epicircles.EpicircleController;
+import fr.qqqq.fourier.epicircles.EpicircleRenderer;
 import fr.qqqq.fourier.shapes.Circle;
 import fr.qqqq.fourier.shapes.Line;
+import fr.qqqq.fourier.shapes.Shape;
 
 public class Main {
 
@@ -25,9 +28,11 @@ public class Main {
 		ctrl.epicircles.add(new Epicircle(150, 0.6, 1));
 		
 		ctrl.init();
+		ArrayList<Shape> hand = new ArrayList<>();
 		ctrl.foreach(s -> {
-			r.shape.add(s);
+			hand.add(s);
 		});
+		r.shape.add(hand);
 		
 		
 		
@@ -41,22 +46,7 @@ public class Main {
 		f.setVisible(true);
 		
 		FPSController con = new FPSController();
-		con.run = new Runnable() {
-			double s = 0;
-			double increment = 1 / 60.0;
-			
-			
-			
-			@Override
-			public void run() {
-				s += s;
-				s %= 1.0;
-				
-				System.out.println(s);
-				
-				ctrl.transform(s);
-			}
-		};
+		con.run = new EpicircleRenderer(ctrl);
 		
 		con.run(r);
 	}

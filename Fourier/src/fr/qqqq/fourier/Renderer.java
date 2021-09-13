@@ -15,8 +15,8 @@ public class Renderer extends JComponent {
 	
 	public CameraMovementListener listener;
 	public Camera cam;
-	
-	public ArrayList<Shape> shape = new ArrayList<Shape>();
+
+	public ArrayList<ArrayList<Shape>> shape = new ArrayList<ArrayList<Shape>>();
 	
 	public Renderer() {
 		super();
@@ -48,8 +48,8 @@ public class Renderer extends JComponent {
 		
 		
 		
-		shape.forEach(s -> {
-			s.render(g2D, cam);
+		shape.forEach(l -> {
+			l.forEach(s -> s.render(g2D, cam));
 		});
 		//g2D.fillOval((int)cam.calcX(40), (int)cam.calcY(40), (int)cam.scaleX(50), (int)cam.scaleY(50));
 		
