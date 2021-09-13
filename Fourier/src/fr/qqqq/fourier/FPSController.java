@@ -1,9 +1,16 @@
 package fr.qqqq.fourier;
 
 public class FPSController {
+	public Runnable run = null;
+
 	public FPSController() {
-		// TODO Auto-generated constructor stub
+		
 	}
+	
+	public FPSController(Runnable run) {
+		this.run = run;
+	}
+	
 	public void run(Renderer r) throws InterruptedException {
 		long lt, t, wait = 0, fps = 1000 / 60;
 		
@@ -13,6 +20,7 @@ public class FPSController {
 			lt += fps;
 			wait = lt - t;
 			
+			run.run();
 			r.repaint();
 			
 			if(wait >= 0) Thread.sleep(wait);
