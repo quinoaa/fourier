@@ -34,7 +34,14 @@ public class Main {
 		});
 		r.shape.add(hand);
 		
+		EpicircleRenderer er = new EpicircleRenderer(ctrl);
+		er.init();
 		
+		ArrayList<Shape> s = new ArrayList<Shape>();
+		r.shape.add(s);
+		for(Line l : er.path) {
+			s.add(l);
+		}
 		
 		r.setPreferredSize(new Dimension(600, 400));
 		f.add(r);
@@ -46,9 +53,12 @@ public class Main {
 		f.setVisible(true);
 		
 		FPSController con = new FPSController();
-		con.run = new EpicircleRenderer(ctrl);
+		con.run = er;
 		
 		con.run(r);
 	}
 
 }
+
+
+
