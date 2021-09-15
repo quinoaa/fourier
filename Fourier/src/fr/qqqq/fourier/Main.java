@@ -11,21 +11,41 @@ import fr.qqqq.fourier.epicircles.EpicircleRenderer;
 import fr.qqqq.fourier.shapes.Circle;
 import fr.qqqq.fourier.shapes.Line;
 import fr.qqqq.fourier.shapes.Shape;
+import fr.qqqq.fourier.sig.Signal;
+import fr.qqqq.fourier.sig.SignalWaveRenderer;
 
 public class Main {
 
 	public static void main(String[] args) throws InterruptedException {
-
 		JFrame f = new JFrame("geom");
 		
+		SignalWaveRenderer wr = new SignalWaveRenderer();
+		Signal sig = new Signal();
+		wr.signal.add(sig);
+		
+		
+		f.add(wr);
+		
+		f.pack();
+		f.setLocationRelativeTo(null);
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		f.setVisible(true);
+		
+		FPSController con = new FPSController();
+		
+		con.run(wr);
+		
+		
+		/*
 		Renderer r = new Renderer();
 		
 		
 		
 		EpicircleController ctrl = new EpicircleController();
-		ctrl.epicircles.add(new Epicircle(50, 0.2, 1));
-		ctrl.epicircles.add(new Epicircle(750, 0, 2));
-		ctrl.epicircles.add(new Epicircle(150, 0.6, 1));
+		for(int i = 0;i < 5;i ++) {
+			ctrl.epicircles.add(new Epicircle(Math.random() * 50 + 10, Math.random(), (int)(Math.random() * 10)));
+		}
 		
 		ctrl.init();
 		ArrayList<Shape> hand = new ArrayList<>();
@@ -46,6 +66,8 @@ public class Main {
 		r.setPreferredSize(new Dimension(600, 400));
 		f.add(r);
 		
+		
+		
 		f.pack();
 		f.setLocationRelativeTo(null);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -53,9 +75,10 @@ public class Main {
 		f.setVisible(true);
 		
 		FPSController con = new FPSController();
-		con.run = er;
+		con.run.add(er);
 		
 		con.run(r);
+		*/
 	}
 
 }

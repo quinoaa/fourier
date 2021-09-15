@@ -18,6 +18,8 @@ public class Renderer extends JComponent {
 
 	public ArrayList<ArrayList<Shape>> shape = new ArrayList<ArrayList<Shape>>();
 	
+	public Color background = Color.WHITE;
+	
 	public Renderer() {
 		super();
 		
@@ -35,10 +37,10 @@ public class Renderer extends JComponent {
 	public void paint(Graphics g) {
 		Graphics2D g2D = (Graphics2D) g;
 		g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		/*
-		g2D.setColor(Color.WHITE);
+		
+		g2D.setColor(background);
 		g2D.fillRect(0, 0, getWidth(), getHeight());
-*/
+
 		g2D.setColor(Color.BLACK);
 		g2D.drawString("cam: " + cam.x + ", " + cam.y, 0, 12);
 		g2D.drawString("zoom: " + cam.zoom, 0, 24);

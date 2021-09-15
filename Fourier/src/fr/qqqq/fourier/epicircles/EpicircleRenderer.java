@@ -9,7 +9,7 @@ public class EpicircleRenderer implements Runnable {
 
 	double s = 0;
 	double increment = 0.0001;
-	int repeatincrement = 100;
+	int repeatincrement = 50;
 	EpicircleController controller;
 	
 	public Line[] path;
