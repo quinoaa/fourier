@@ -3,13 +3,21 @@ package fr.qqqq.fourier.sig;
 import java.awt.Color;
 
 public class Signal {
-	Color color = Color.YELLOW;
+	public Color color = Color.YELLOW;
 
-	double start = 0;
-	double end = 200;
 	
 	public Signal() {
 		
+	}
+
+	public double getvalue(double index) {
+		return 0;
+	}
+	public double getstart() {
+		return 0;
+	}
+	public double getend() {
+		return 0;
 	}
 	
 	public double maxheight() {

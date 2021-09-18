@@ -9,6 +9,7 @@ import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Line2D;
 import java.util.ArrayList;
 
 import javax.swing.JComponent;
@@ -27,6 +28,8 @@ public class SignalWaveRenderer extends JComponent implements MouseMotionListene
 	double height = 2;
 	double min = -1;
 	
+	double precision = 1;
+	
 	int hlinespace = 20;
 	
 	public SignalWaveRenderer() {
@@ -38,7 +41,7 @@ public class SignalWaveRenderer extends JComponent implements MouseMotionListene
 	
 	@Override
 	public void paint(Graphics g) {
-		// update(); TODO
+		update();
 		
 		Graphics2D g2D = (Graphics2D) g;
 		g2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -64,14 +67,26 @@ public class SignalWaveRenderer extends JComponent implements MouseMotionListene
 				g2D.setColor(Color.WHITE);
 			}
 			
-			System.out.println(y);
 			drawString(g2D, right, center, String.format("%.2f", value), -10, (int) y);
 			g2D.drawLine(0, (int)y, graphw, (int)y);
 		}
 		
 		
 		
-		
+		Line2D.Double line = new Line2D.Double();
+		signal.forEach(sig -> {
+			g2D.setColor(sig.color);
+			for(int d = 0;d < graphw * precision;d ++) {
+				line.x1 = line.x2;
+				line.y1 = line.y2;
+				
+				line.x2 = d / precision;
+				line.y2 = ((0 - sig.getvalue(d * sig.getend() / graphw / precision)) + min) * graphh / height;
+				
+				if(d == 0) continue;
+				g2D.draw(line);
+			}
+		});
 		
 		
 		
@@ -81,9 +96,6 @@ public class SignalWaveRenderer extends JComponent implements MouseMotionListene
 		
 		g2D.drawLine(marginleft, margintop, marginleft, h - marginbottom);
 		g2D.drawLine(w - marginright, h - marginbottom, marginleft, h - marginbottom);
-	}
-	private void drawhline() {
-		
 	}
 
 	static final int left = 0, top = 0, center = 1, right = 2, bottom = 2;
@@ -117,8 +129,17 @@ public class SignalWaveRenderer extends JComponent implements MouseMotionListene
 	}
 	
 	public void update() {
-		height = 0;
-		min = 0;
+		min = Double.MAX_VALUE;
+		height = Double.MIN_VALUE;
+		
+		signal.forEach(sig -> {
+			double smin = sig.minheight();
+			double sh = sig.maxheight() - smin;
+
+			if(min > smin) min = smin;
+			if(height < sh) height = sh;
+			
+		});
 	}
 
 	@Override

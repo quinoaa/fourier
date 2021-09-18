@@ -1,5 +1,6 @@
 package fr.qqqq.fourier;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;
 
@@ -11,6 +12,7 @@ import fr.qqqq.fourier.epicircles.EpicircleRenderer;
 import fr.qqqq.fourier.shapes.Circle;
 import fr.qqqq.fourier.shapes.Line;
 import fr.qqqq.fourier.shapes.Shape;
+import fr.qqqq.fourier.sig.PointSignal;
 import fr.qqqq.fourier.sig.Signal;
 import fr.qqqq.fourier.sig.SignalWaveRenderer;
 
@@ -20,9 +22,30 @@ public class Main {
 		JFrame f = new JFrame("geom");
 		
 		SignalWaveRenderer wr = new SignalWaveRenderer();
-		Signal sig = new Signal();
+		
+
+		PointSignal sig = new PointSignal();
+
+		int count = (int) (Math.random() * 10 + 5);
+		for(int i = 0;i < count;i ++) {
+			sig.values.add(Math.random() * 1000 - 500);
+		}
 		wr.signal.add(sig);
 		
+		
+		
+		/*
+		for(int c = 0;c < 2;c ++) {
+			PointSignal sig = new PointSignal();
+			sig.color = Color.getHSBColor((float) Math.random(), 1, 1);
+			
+			int count = (int) (Math.random() * 10 + 5);
+			for(int i = 0;i < count;i ++) {
+				sig.values.add(Math.random() * 1000);
+			}
+			wr.signal.add(sig);
+		}
+		*/
 		
 		f.add(wr);
 		
