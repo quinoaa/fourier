@@ -17,20 +17,20 @@ import javax.swing.JComponent;
 public class SignalWaveRenderer extends JComponent implements MouseMotionListener {
 	public ArrayList<Signal> signal = new ArrayList<Signal>();
 
-	Color background = Color.black;
-	Color foreground = Color.WHITE;
-	Color linecolor = Color.DARK_GRAY;
+	public Color background = Color.black;
+	public Color foreground = Color.WHITE;
+	public Color linecolor = Color.DARK_GRAY;
 	
-	Font font = new Font(Font.SANS_SERIF, 0, 14);
+	public Font font = new Font(Font.SANS_SERIF, 0, 14);
 
 	double start = -12.3;
 	double end = 10563.9;
 	double height = 2;
 	double min = -1;
 	
-	double precision = 1;
+	public double precision = 1;
 	
-	int hlinespace = 20;
+	public int hlinespace = 20;
 	
 	public SignalWaveRenderer() {
 		this.setPreferredSize(new Dimension(800, 200));

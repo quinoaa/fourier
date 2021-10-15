@@ -12,9 +12,12 @@ import fr.qqqq.fourier.epicircles.EpicircleRenderer;
 import fr.qqqq.fourier.shapes.Circle;
 import fr.qqqq.fourier.shapes.Line;
 import fr.qqqq.fourier.shapes.Shape;
+import fr.qqqq.fourier.sig.Fourier;
 import fr.qqqq.fourier.sig.PointSignal;
 import fr.qqqq.fourier.sig.Signal;
 import fr.qqqq.fourier.sig.SignalWaveRenderer;
+import fr.qqqq.fourier.sig.SinusSignal;
+import fr.qqqq.fourier.sig.SinusSignal.Sinus;
 
 public class Main {
 
@@ -22,15 +25,26 @@ public class Main {
 		JFrame f = new JFrame("geom");
 		
 		SignalWaveRenderer wr = new SignalWaveRenderer();
+		//wr.precision = 2;
 		
-
+		
 		PointSignal sig = new PointSignal();
 
-		int count = (int) (Math.random() * 10 + 5);
+		int count = (int) (Math.random() * 10 + 10);
 		for(int i = 0;i < count;i ++) {
-			sig.values.add(Math.random() * 1000 - 500);
+			sig.values.add(Math.random() * 20 - 10);
 		}
 		wr.signal.add(sig);
+		
+		
+		SinusSignal ss = new SinusSignal();
+
+		ss.max = 10;
+		ss.min = -10;
+		ss.color = Color.red;
+		Fourier.process(ss.sinuses, sig);
+		
+		wr.signal.add(ss);
 		
 		
 		
@@ -66,9 +80,14 @@ public class Main {
 		
 		
 		EpicircleController ctrl = new EpicircleController();
-		for(int i = 0;i < 5;i ++) {
-			ctrl.epicircles.add(new Epicircle(Math.random() * 50 + 10, Math.random(), (int)(Math.random() * 10)));
-		}
+		ctrl.epicircles.add(new Epicircle(100, 0, 1));
+		ctrl.epicircles.add(new Epicircle(100, 0, -3));
+		
+		//for(int i = 0;i < 5;i ++) {
+		//	ctrl.epicircles.add(new Epicircle(Math.random() * 50 + 10, Math.random(), (int)(Math.random() * 10)));
+		//}
+		
+		
 		
 		ctrl.init();
 		ArrayList<Shape> hand = new ArrayList<>();
